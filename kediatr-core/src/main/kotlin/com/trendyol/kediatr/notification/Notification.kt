@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.notification
 
 /**
  * Marker interface for a notification

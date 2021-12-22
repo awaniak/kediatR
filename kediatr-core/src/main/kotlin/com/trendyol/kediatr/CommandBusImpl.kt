@@ -1,6 +1,22 @@
 package com.trendyol.kediatr
 
-class CommandBusImpl(private val registry: Registry, private val publishStrategy: PublishStrategy = StopOnExceptionPublishStrategy()) : CommandBus {
+import com.trendyol.boru.Pipeline
+import com.trendyol.kediatr.command.Command
+import com.trendyol.kediatr.command.CommandWithResult
+import com.trendyol.kediatr.notification.Notification
+import com.trendyol.kediatr.notification.PublishStrategy
+import com.trendyol.kediatr.notification.StopOnExceptionPublishStrategy
+import com.trendyol.kediatr.query.Query
+
+class CommandBusImpl(
+    private val registry: Registry,
+    private val publishStrategy: PublishStrategy = StopOnExceptionPublishStrategy(),
+    private val beforeQueryPipeline: Pipeline<KediatrQueryPipelineContext>?,
+    private val afterQueryPipeline: Pipeline<KediatrQueryPipelineContext>?,
+    private val beforeCommandPipeline: Pipeline<KediatrCommandPipelineContext>?,
+    private val afterCommandPipeline: Pipeline<KediatrCommandPipelineContext>?,
+) : CommandBus {
+
     override fun <TQuery : Query<TResponse>, TResponse> executeQuery(query: TQuery): TResponse = processPipeline(registry.getPipelineBehaviors(), query) {
         registry.resolveQueryHandler(query.javaClass).handle(query)
     }
@@ -17,8 +33,18 @@ class CommandBusImpl(private val registry: Registry, private val publishStrategy
         publishStrategy.publish(notification, registry.resolveNotificationHandlers(notification.javaClass))
     }
 
-    override suspend fun <TQuery : Query<TResponse>, TResponse> executeQueryAsync(query: TQuery): TResponse = processAsyncPipeline(registry.getAsyncPipelineBehaviors(), query) {
-        registry.resolveAsyncQueryHandler(query.javaClass).handleAsync(query)
+    override suspend fun <TQuery : Query<TResponse>, TResponse> executeQueryAsync(query: TQuery): TResponse {
+        val context = KediatrQueryPipelineContext(query)
+        beforeQueryPipeline?.execute(context)
+        var result = registry.resolveAsyncQueryHandler(query.javaClass).handleAsync(query)
+
+        afterQueryPipeline?.let { pipeline ->
+            context.result = result
+            pipeline.execute(context)
+            result = context.result as? TResponse ?: throw Exception("Result is not of type TResponse")
+        }
+
+        return result
     }
 
     override suspend fun <TCommand : Command> executeCommandAsync(command: TCommand) = processAsyncPipeline(registry.getAsyncPipelineBehaviors(), command) {

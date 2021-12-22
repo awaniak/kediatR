@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.command
 
 /**
  * Marker interface for a command with result

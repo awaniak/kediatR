@@ -1,6 +1,11 @@
 package com.trendyol.kediatr.koin
 
 import com.trendyol.kediatr.*
+import com.trendyol.kediatr.exception.HandlerNotFoundException
+import com.trendyol.kediatr.pipeline.PipelineBehavior
+import com.trendyol.kediatr.query.AsyncQueryHandler
+import com.trendyol.kediatr.query.Query
+import com.trendyol.kediatr.query.QueryHandler
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension

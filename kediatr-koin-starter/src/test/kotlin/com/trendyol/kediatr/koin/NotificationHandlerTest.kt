@@ -1,6 +1,10 @@
 package com.trendyol.kediatr.koin
 
 import com.trendyol.kediatr.*
+import com.trendyol.kediatr.notification.AsyncNotificationHandler
+import com.trendyol.kediatr.notification.Notification
+import com.trendyol.kediatr.notification.NotificationHandler
+import com.trendyol.kediatr.pipeline.PipelineBehavior
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test

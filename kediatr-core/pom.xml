@@ -9,12 +9,6 @@
     <version>1.0.17</version>
     <packaging>jar</packaging>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
@@ -270,6 +264,10 @@
             <artifactId>kotlin-reflect</artifactId>
             <scope>runtime</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.trendyol</groupId>
+            <artifactId>boru</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>

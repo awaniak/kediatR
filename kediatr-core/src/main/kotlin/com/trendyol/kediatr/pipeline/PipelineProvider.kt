@@ -1,8 +1,8 @@
-package com.trendyol.kediatr.common
+package com.trendyol.kediatr.dependency
 
-import com.trendyol.kediatr.AsyncPipelineBehavior
 import com.trendyol.kediatr.DependencyProvider
-import com.trendyol.kediatr.PipelineBehavior
+import com.trendyol.kediatr.pipeline.AsyncPipelineBehavior
+import com.trendyol.kediatr.pipeline.PipelineBehavior
 
 /**
  * PipelineProvider creates a pipeline behavior with enabled spring injection.

@@ -1,6 +1,10 @@
 package com.trendyol
 
 import com.trendyol.kediatr.*
+import com.trendyol.kediatr.exception.HandlerNotFoundException
+import com.trendyol.kediatr.query.AsyncQueryHandler
+import com.trendyol.kediatr.query.Query
+import com.trendyol.kediatr.query.QueryHandler
 import com.trendyol.kediatr.spring.KediatrConfiguration
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

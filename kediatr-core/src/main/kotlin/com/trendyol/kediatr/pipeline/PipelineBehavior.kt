@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.pipeline
 
 /**
  * Interface to be implemented for a non-blocking pipeline behavior

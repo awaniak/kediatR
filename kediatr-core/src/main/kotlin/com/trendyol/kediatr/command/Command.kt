@@ -1,4 +1,6 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.command
+
+import com.trendyol.kediatr.Request
 
 /**
  * Marker interface for a command
@@ -7,4 +9,4 @@ package com.trendyol.kediatr
  * @see CommandHandler
  * @see AsyncCommandHandler
  */
-interface Command
+interface Command: Request<Unit>

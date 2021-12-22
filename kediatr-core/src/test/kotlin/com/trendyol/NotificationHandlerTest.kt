@@ -1,6 +1,9 @@
 package com.trendyol
 
 import com.trendyol.kediatr.*
+import com.trendyol.kediatr.notification.AsyncNotificationHandler
+import com.trendyol.kediatr.notification.Notification
+import com.trendyol.kediatr.notification.NotificationHandler
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import java.util.concurrent.CountDownLatch

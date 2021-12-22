@@ -1,6 +1,16 @@
 package com.trendyol
 
-import com.trendyol.kediatr.*
+import com.trendyol.boru.PipelineStep
+import com.trendyol.boru.pipelineBuilder
+import com.trendyol.boru.usePipelineStepWhen
+import com.trendyol.kediatr.CommandBus
+import com.trendyol.kediatr.CommandBusBuilder
+import com.trendyol.kediatr.KediatrPipelineContext
+import com.trendyol.kediatr.KediatrQueryPipelineContext
+import com.trendyol.kediatr.exception.HandlerNotFoundException
+import com.trendyol.kediatr.query.AsyncQueryHandler
+import com.trendyol.kediatr.query.Query
+import com.trendyol.kediatr.query.QueryHandler
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -65,6 +75,58 @@ class QueryHandlerTest {
 
         assertNotNull(exception)
         assertEquals(exception.message, "handler could not be found for com.trendyol.NonExistQuery")
+    }
+
+    @Test
+    fun `should execute pipelines`() = runBlocking {
+        val handler = AsyncTestQueryHandler()
+        val handlers: HashMap<Class<*>, Any> = hashMapOf(Pair(AsyncTestQueryHandler::class.java, handler))
+        val provider = ManuelDependencyProvider(handlers)
+
+        val beforePipeline = pipelineBuilder<KediatrQueryPipelineContext> {
+            usePipelineStepWhen(TestStep()) {
+                it.request is TestQuery
+            }
+        }
+
+        val afterPipeline = pipelineBuilder<KediatrQueryPipelineContext> {
+            usePipelineStepWhen(TestStep()) {
+                it.request is TestQuery
+            }
+        }
+
+        val bus: CommandBus = CommandBusBuilder(provider)
+            .withBeforeCommandPipeline(beforePipeline)
+            .withAfterCommandPipeline(afterPipeline)
+            .build()
+
+        val result = bus.executeQueryAsync(TestQuery(1))
+
+        println(result)
+    }
+}
+
+class TestStep : PipelineStep<KediatrQueryPipelineContext> {
+    override suspend fun execute(context: KediatrQueryPipelineContext, next: suspend (KediatrQueryPipelineContext) -> Unit) = with(context.request as TestQuery) {
+        println(this.id)
+        println(context.result)
+        context.result = "holley"
+        next(context)
+    }
+}
+
+class CachingTestStep : PipelineStep<KediatrQueryPipelineContext> {
+    private val cache = hashMapOf<String, String>()
+
+    override suspend fun execute(context: KediatrQueryPipelineContext, next: suspend (KediatrQueryPipelineContext) -> Unit) = with(context.request as TestQuery) {
+        cache[this.id.toString()] ?: run {
+            cache[this.id.toString()] = context.result
+            next(context)
+        }
+
+
+        context.result = "holley"
+        next(context)
     }
 }
 

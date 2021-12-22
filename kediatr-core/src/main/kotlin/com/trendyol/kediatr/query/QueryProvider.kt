@@ -1,8 +1,8 @@
-package com.trendyol.kediatr.common
+package com.trendyol.kediatr.dependency
 
-import com.trendyol.kediatr.AsyncQueryHandler
 import com.trendyol.kediatr.DependencyProvider
-import com.trendyol.kediatr.QueryHandler
+import com.trendyol.kediatr.query.AsyncQueryHandler
+import com.trendyol.kediatr.query.QueryHandler
 
 /**
  * QueryProvider creates a query handler with enabled spring injection.

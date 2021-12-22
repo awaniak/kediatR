@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.notification
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

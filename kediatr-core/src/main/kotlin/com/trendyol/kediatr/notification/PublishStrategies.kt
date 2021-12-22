@@ -1,5 +1,6 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.notification
 
+import com.trendyol.kediatr.exception.AggregateException
 import kotlinx.coroutines.*
 import java.util.concurrent.CompletableFuture
 

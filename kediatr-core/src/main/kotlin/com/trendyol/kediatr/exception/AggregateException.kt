@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.exception
 
 /**
  * A container for one or more exceptions that occurred during multiple task execution.

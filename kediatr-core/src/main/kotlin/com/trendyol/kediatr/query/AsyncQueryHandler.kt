@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.query
 
 /**
  * Interface to be implemented for a non-blocking query handler

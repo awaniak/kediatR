@@ -1,6 +1,13 @@
 package com.trendyol.kediatr.koin
 
 import com.trendyol.kediatr.*
+import com.trendyol.kediatr.command.*
+import com.trendyol.kediatr.notification.AsyncNotificationHandler
+import com.trendyol.kediatr.notification.NotificationHandler
+import com.trendyol.kediatr.pipeline.AsyncPipelineBehavior
+import com.trendyol.kediatr.pipeline.PipelineBehavior
+import com.trendyol.kediatr.query.AsyncQueryHandler
+import com.trendyol.kediatr.query.QueryHandler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
@@ -111,7 +118,7 @@ class MyBrokenAsyncHandler(
 
 class MyPipelineBehavior(
     private val commandBus: CommandBus
-) : PipelineBehavior{
+) : PipelineBehavior {
     override fun <TRequest> preProcess(request: TRequest) {
         pipelinePreProcessCounter++
     }

@@ -1,9 +1,9 @@
 package com.trendyol
 
-import com.trendyol.kediatr.AsyncNotificationHandler
+import com.trendyol.kediatr.notification.AsyncNotificationHandler
 import com.trendyol.kediatr.CommandBus
-import com.trendyol.kediatr.Notification
-import com.trendyol.kediatr.NotificationHandler
+import com.trendyol.kediatr.notification.Notification
+import com.trendyol.kediatr.notification.NotificationHandler
 import com.trendyol.kediatr.spring.KediatrConfiguration
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

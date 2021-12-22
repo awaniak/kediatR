@@ -1,11 +1,25 @@
 package com.trendyol.kediatr
 
-import com.trendyol.kediatr.common.AsyncNotificationProvider
-import com.trendyol.kediatr.common.AsyncPipelineProvider
-import com.trendyol.kediatr.common.AsyncQueryProvider
-import com.trendyol.kediatr.common.NotificationProvider
-import com.trendyol.kediatr.common.PipelineProvider
-import com.trendyol.kediatr.common.QueryProvider
+import com.trendyol.kediatr.command.*
+import com.trendyol.kediatr.dependency.AsyncPipelineProvider
+import com.trendyol.kediatr.dependency.AsyncQueryProvider
+import com.trendyol.kediatr.dependency.PipelineProvider
+import com.trendyol.kediatr.dependency.QueryProvider
+import com.trendyol.kediatr.dependency.AsyncCommandProvider
+import com.trendyol.kediatr.dependency.AsyncCommandWithResultProvider
+import com.trendyol.kediatr.dependency.AsyncNotificationProvider
+import com.trendyol.kediatr.dependency.CommandProvider
+import com.trendyol.kediatr.dependency.CommandWithResultProvider
+import com.trendyol.kediatr.dependency.NotificationProvider
+import com.trendyol.kediatr.exception.HandlerNotFoundException
+import com.trendyol.kediatr.notification.AsyncNotificationHandler
+import com.trendyol.kediatr.notification.Notification
+import com.trendyol.kediatr.notification.NotificationHandler
+import com.trendyol.kediatr.pipeline.AsyncPipelineBehavior
+import com.trendyol.kediatr.pipeline.PipelineBehavior
+import com.trendyol.kediatr.query.AsyncQueryHandler
+import com.trendyol.kediatr.query.Query
+import com.trendyol.kediatr.query.QueryHandler
 import java.lang.reflect.ParameterizedType
 
 class RegistryImpl(

@@ -1,8 +1,8 @@
-package com.trendyol.kediatr.common
+package com.trendyol.kediatr.dependency
 
-import com.trendyol.kediatr.AsyncNotificationHandler
 import com.trendyol.kediatr.DependencyProvider
-import com.trendyol.kediatr.NotificationHandler
+import com.trendyol.kediatr.notification.AsyncNotificationHandler
+import com.trendyol.kediatr.notification.NotificationHandler
 
 internal class NotificationProvider<H : NotificationHandler<*>>(
     private val dependencyProvider: DependencyProvider,

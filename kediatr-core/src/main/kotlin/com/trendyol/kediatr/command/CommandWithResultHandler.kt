@@ -1,4 +1,4 @@
-package com.trendyol.kediatr
+package com.trendyol.kediatr.command
 
 /**
  * Interface to be implemented for a  command with result handler
